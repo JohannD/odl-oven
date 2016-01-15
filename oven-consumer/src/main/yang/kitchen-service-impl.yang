@@ -1,0 +1,89 @@
+module kitchen-service-impl {
+
+    yang-version 1;
+    namespace "urn:opendaylight:params:xml:ns:yang:controller:config:kitchen-service:impl";
+    prefix "kitchen-service-impl";
+    
+    import config { prefix config; revision-date 2013-04-05; }
+    import rpc-context { prefix rpcx; revision-date 2013-06-17; }
+    import opendaylight-md-sal-binding { prefix mdsal; revision-date 2013-10-28; }
+
+    description
+        "This module contains the base YANG definitions for
+        kitchen-service implementation.";
+
+    revision "2016-01-13" {
+        description
+            "Initial revision.";
+    }
+    
+    // This is the definition of kitchen service interface identity.
+    // It will be used by the config subsystem to advertise the service instance
+    // provided by the kitchen-service-impl module as an OSGI service
+    // with the KitchenService java interface.
+    // Since we didn't make a yang data model for the album, and we don't
+    // advertise the KitchenServiceImpl with the MD-SAL service registry,
+    // the only other way to access the KitchenService is by obtaining
+    // it via OSGI.
+    
+    identity kitchen-service {
+     base "config:service-type";
+     // config:java-class property specifies the package path to KitchenService java interface
+     config:java-class "org.opendaylight.controller.kitchen.api.KitchenService";
+    }
+    
+    // This is the definition of kitchen service implementation module identity. 
+    identity kitchen-service-impl {
+     base "config:module-type";
+     //refers to the kitchen-service identity
+     config:provided-service kitchen-service;
+     config:java-name-prefix KitchenService;
+    }
+    
+    augment "/config:modules/config:module/config:configuration" {
+        case kitchen-service-impl {
+            when "/config:modules/config:module/config:type = 'kitchen-service-impl'";
+            container rpc-registry {
+                uses config:service-ref {
+                    refine type {
+                        mandatory true;
+                        config:required-identity mdsal:binding-rpc-registry;
+                    }
+                }
+            }
+            container notification-service {
+               uses config:service-ref {
+                  refine type {
+                     mandatory true;
+                     config:required-identity mdsal:binding-notification-service;
+                  }
+               }
+            }
+        }
+    } // augment configuration
+    
+    augment "/config:modules/config:module/config:state" {
+        case kitchen-service-impl {
+            when "/config:modules/config:module/config:type = 'kitchen-service-impl'";
+            rpcx:rpc-context-instance "make-chips-with-chicken-rpc";
+        }
+    } // augment state
+    
+    identity make-chips-with-chicken-rpc;
+    //rpc make-chips-with-chicken {
+    rpc make-chips-with-chicken-rpc {
+      description "JMX call to make a meal with chips accompanimentType and chicken foodType.";
+      input {
+        uses rpcx:rpc-context-ref {
+          refine context-instance {
+            rpcx:rpc-context-instance make-chips-with-chicken-rpc;
+          } 
+        }
+      } // input
+      output {
+        leaf result {
+          type boolean;
+        }
+      } // output
+    } // rpc make-chips-with-chicken
+} // module kitchen-service-impl
