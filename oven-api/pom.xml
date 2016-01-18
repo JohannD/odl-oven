@@ -21,40 +21,40 @@ and is available at http://www.eclipse.org/legal/epl-v10.html
   <packaging>bundle</packaging>
   
   <build>
-    <plugins>
-      <plugin>
-        <groupId>org.opendaylight.yangtools</groupId>
-        <artifactId>yang-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <goals>
-              <goal>generate-sources</goal>
-            </goals>
-            <configuration>
-              <yangFilesRootDir>src/main/yang</yangFilesRootDir>
-              <codeGenerators>
-                <generator>
-                  <codeGeneratorClass>org.opendaylight.yangtools.maven.sal.api.gen.plugin.CodeGeneratorImpl</codeGeneratorClass>
-                  <outputBaseDir>${salGeneratorPath}</outputBaseDir>
-                </generator>
-              </codeGenerators>
-              <inspectDependencies>true</inspectDependencies>
-            </configuration>
-          </execution>
-        </executions>
-        <dependencies>
-          <dependency>
-            <groupId>org.opendaylight.yangtools</groupId>
-            <artifactId>maven-sal-api-gen-plugin</artifactId>
-            <version>0.7.0-SNAPSHOT</version>
-            <type>jar</type>
-          </dependency>
-        </dependencies>
-      </plugin>
-    </plugins>
-  </build>
- 
- <dependencies>
+   <plugins>
+     <plugin>
+       <groupId>org.opendaylight.yangtools</groupId>
+       <artifactId>yang-maven-plugin</artifactId>
+       <executions>
+         <execution>
+           <goals>
+             <goal>generate-sources</goal>
+           </goals>
+           <configuration>
+             <yangFilesRootDir>src/main/yang</yangFilesRootDir>
+             <codeGenerators>
+               <generator>
+                 <codeGeneratorClass>org.opendaylight.yangtools.maven.sal.api.gen.plugin.CodeGeneratorImpl</codeGeneratorClass>
+                 <outputBaseDir>${salGeneratorPath}</outputBaseDir>
+               </generator>
+             </codeGenerators>
+             <inspectDependencies>true</inspectDependencies>
+           </configuration>
+         </execution>
+       </executions>
+       <dependencies>
+         <dependency>
+           <groupId>org.opendaylight.yangtools</groupId>
+           <artifactId>maven-sal-api-gen-plugin</artifactId>
+           <version>0.7.0-SNAPSHOT</version>
+           <type>jar</type>
+         </dependency>
+       </dependencies>
+     </plugin>
+   </plugins>
+ </build>
+  
+  <dependencies>
    <dependency>
      <groupId>org.opendaylight.yangtools</groupId>
      <artifactId>yang-binding</artifactId>
@@ -64,14 +64,11 @@ and is available at http://www.eclipse.org/legal/epl-v10.html
      <artifactId>yang-common</artifactId>
    </dependency>
  </dependencies>
- 
- <scm>
-   <connection>scm:git:ssh://git.opendaylight.org:29418/controller.git</connection>
-   <developerConnection>scm:git:ssh://git.opendaylight.org:29418/controller.git</developerConnection>
-   <url>https://wiki.opendaylight.org/view/OpenDaylight_Controller:MD-SAL</url>
-   <tag>HEAD</tag>
+  
+<scm>
+  <connection>scm:git:ssh://git.opendaylight.org:29418/controller.git</connection>
+  <developerConnection>scm:git:ssh://git.opendaylight.org:29418/controller.git</developerConnection>
+  <url>https://wiki.opendaylight.org/view/OpenDaylight_Controller:MD-SAL</url>
+  <tag>HEAD</tag>
  </scm>
- 
 </project>
-
-

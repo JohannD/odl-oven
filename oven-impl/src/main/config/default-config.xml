@@ -14,47 +14,49 @@ and is available at http://www.eclipse.org/legal/epl-v10.html
       <capability>urn:opendaylight:params:xml:ns:yang:controller:config:kitchen-service:impl?module=kitchen-service-impl&amp;revision=2016-01-13</capability>
   </required-capabilities>
   <configuration>
-  
+
     <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
       <modules xmlns="urn:opendaylight:params:xml:ns:yang:controller:config">
         <module>
-          <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:oven:impl">prefix:oven</type>
+          <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:oven:impl">oven:oven-impl</type>
           <name>oven-impl</name>
-          <broker>
-            <type xmlns:binding="urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding">binding:binding-async-data-broke</type>
-            <name>binding-data-broker</name>
-          </broker>
+          <data-broker>
+                       <type xmlns:binding="urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding">binding:binding-async-data-broker</type>
+                       <name>binding-data-broker</name>
+          </data-broker>
           <rpc-registry>
-              <type xmlns:binding="urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding">binding:binding-rpc-registry</type>
-              <name>binding-rpc-broker</name>
+                        <type xmlns:binding="urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding">binding:binding-rpc-registry</type>
+                        <name>binding-rpc-broker</name>
           </rpc-registry>
           <notification-service>
-              <type xmlns:binding="urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding">binding:binding-notification-service</type>
-              <name>binding-notification-broker</name>
-          </notification-service>
+                       <type xmlns:binding="urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding">binding:binding-notification-service</type>
+                       <name>binding-notification-broker</name>
+                   </notification-service>
         </module>
         <module>
-          <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:config:meal:service:impl">kitchen-service-impl</type>
-          <name>kitchen-service-impl</name>
-          <rpc-registry>
-              <type xmlns:binding="urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding">binding:binding-rpc-registry</type>
-              <name>binding-rpc-broker</name>
-          </rpc-registry>
-          <notification-service>
-              <type xmlns:binding="urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding">binding:binding-notification-service</type>
-              <name>binding-notification-broker</name>
-          </notification-service>
-        </module>
+                 <type xmlns:kitchen="urn:opendaylight:params:xml:ns:yang:controller:config:kitchen-service:impl">kitchen:kitchen-service-impl</type>
+                 <name>kitchen-service-impl</name>
+                 <rpc-registry>
+                    <type xmlns:binding="urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding">binding:binding-rpc-registry</type>
+                    <name>binding-rpc-broker</name>
+                 </rpc-registry>
+                 <notification-service>
+                       <type xmlns:binding="urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding">binding:binding-notification-service</type>
+                       <name>binding-notification-broker</name>
+                   </notification-service>
+               </module>
       </modules>
       <services xmlns="urn:opendaylight:params:xml:ns:yang:controller:config">
-        <service>
-          <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:config:kitchen-service:impl">prefix:kitchen-service</type>
-          <instance>
-            <name>kitchen-service</name>
-            <provider>/modules/module[type='kitchen-service-impl'][name='kitchen-service-impl']</provider>
-          </instance>
-        </service>
-      </services>
+               <service>
+                   <type xmlns:kitchen="urn:opendaylight:params:xml:ns:yang:controller:config:kitchen-service:impl">
+                       kitchen:kitchen-service
+                   </type>
+                   <instance>
+                       <name>kitchen-service</name>
+                       <provider>/modules/module[type='kitchen-service-impl'][name='kitchen-service-impl']</provider>
+                   </instance>
+               </service>
+           </services>
     </data>
   </configuration>
 </snapshot>

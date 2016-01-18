@@ -24,11 +24,11 @@ and is available at http://www.eclipse.org/legal/epl-v10.html INTERNAL
   </prerequisites>
   <modules>
     <module>oven-api</module>
-    <module>oven-consumer</module>
     <module>oven-impl</module>
     <module>oven-karaf</module>
     <module>oven-features</module>
     <module>oven-artifacts</module>
+    <module>oven-consumer</module>
   </modules>
   <!-- DO NOT install or deploy the repo root pom as it's only needed to initiate a build -->
   <build>
